@@ -4,7 +4,7 @@ import { BadRequestError, ServerError, UserError } from "../../utils/app.error";
 import genToken from "../../utils/gen.token";
 
 export const register = async (_: any, { input }: any) => {
-  delete input.confirm_password;
+  delete input.confirmPassword;
   input.password = await argon.hash(input.password);
   try {
     const user = await UsersDb.create({ ...input });

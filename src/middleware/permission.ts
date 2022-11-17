@@ -40,7 +40,7 @@ const validateRegister = inputRule()((yup) =>
           .string()
           .matches(PasswordRegex, PasswordError)
           .required("Password is required"),
-        confirm_password: yup
+        confirmPassword: yup
           .string()
           .oneOf([yup.ref("password")], "Passwords must match")
           .required("Confirm password is required"),
@@ -61,7 +61,7 @@ const validateChangePassword = inputRule()((yup) =>
           .string()
           .matches(PasswordRegex, PasswordError)
           .required("Password is required"),
-        confirm_password: yup
+        confirmPassword: yup
           .string()
           .oneOf([yup.ref("newPassword")], "Passwords must match")
           .required("Confirm password is required"),

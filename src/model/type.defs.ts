@@ -11,12 +11,12 @@ const typeDefs = gql`
     token: String!
   }
 
-  input createInput {
+  input registerInput {
     fullName: String!
     category: Category!
     email: String!
     password: String!
-    confirm_password: String!
+    confirmPassword: String!
   }
 
   input loginInput {
@@ -26,7 +26,7 @@ const typeDefs = gql`
 
   input changePasswordInput {
     newPassword: String!
-    confirm_password: String!
+    confirmPassword: String!
   }
 
   input idInput {
@@ -44,7 +44,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    register(input: createInput): User!
+    register(input: registerInput): User!
     login(input: loginInput): Token!
     changePassword(input: changePasswordInput): User!
     deleteAccount: User!

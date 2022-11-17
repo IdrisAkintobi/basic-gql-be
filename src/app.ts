@@ -2,7 +2,7 @@ import { makeExecutableSchema } from "@graphql-tools/schema";
 import { ApolloServer } from "apollo-server-express";
 import "dotenv/config";
 import express from "express";
-import { expressjwt } from "express-jwt";
+import { expressjwt, Request } from "express-jwt";
 import { applyMiddleware } from "graphql-middleware";
 import morgan from "morgan";
 import context from "./middleware/ctx";
@@ -23,7 +23,15 @@ app.use(
 );
 
 //Initialize morgan
-app.use(morgan("dev"));
+morgan.token("graphql-query", (req: Request) => {
+  const query = req.body?.query;
+  return `GraphQL query: ${query}`;
+});
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms \n :graphql-query"
+  )
+);
 
 //Create Schema
 const schema = makeExecutableSchema({
