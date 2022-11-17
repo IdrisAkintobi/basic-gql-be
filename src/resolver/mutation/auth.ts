@@ -9,7 +9,8 @@ export const register = async (_: any, { input }: any) => {
   try {
     const user = await UsersDb.create({ ...input });
     return user;
-  } catch (error) {
+  } catch (error: any) {
+    if (error.code === 11000) throw new UserError("Email already exists");
     throw new ServerError("User not created, try again");
   }
 };
