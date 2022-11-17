@@ -1,5 +1,6 @@
 import { login, register } from "./mutation/auth";
-import { changePassword, user } from "./query/user";
+import { changePassword, deleteAccount } from "./mutation/mod.user";
+import { user } from "./query/user";
 
 const resolver = {
   Query: {
@@ -9,6 +10,7 @@ const resolver = {
     register,
     login,
     changePassword,
+    deleteAccount,
   },
 };
 
