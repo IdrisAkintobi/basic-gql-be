@@ -2,6 +2,10 @@ import { model, Schema } from "mongoose";
 
 const UserSchema = new Schema(
   {
+    fullName: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       lowercase: true,
@@ -13,12 +17,9 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    firstName: {
+    category: {
       type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
+      enum: ["USER", "BUSINESS", "CUSTOMER"],
       required: true,
     },
   },

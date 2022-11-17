@@ -31,6 +31,10 @@ const validateRegister = inputRule()((yup) =>
   yup
     .object({
       input: yup.object({
+        fullName: yup
+          .string()
+          .trim("Remove trailing spaces")
+          .required("Enter firstName"),
         email: yup.string().email("Enter valid email").required(),
         password: yup
           .string()
@@ -40,8 +44,10 @@ const validateRegister = inputRule()((yup) =>
           .string()
           .oneOf([yup.ref("password")], "Passwords must match")
           .required("Confirm password is required"),
-        firstName: yup.string().required("Enter firstName"),
-        lastName: yup.string().required("Enter lastName"),
+        category: yup
+          .string()
+          .oneOf(["USER", "BUSINESS", "CUSTOMER"])
+          .default("USER"),
       }),
     })
     .strict(true)
@@ -73,6 +79,7 @@ const permissions = shield(
     Mutation: {
       register: validateRegister,
       login: validateLogin,
+      deleteAccount: isAuthenticated,
       changePassword: and(isAuthenticated, validateChangePassword),
     },
   },

@@ -2,9 +2,9 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type User {
     id: String!
-    firstName: String!
-    lastName: String!
+    fullName: String!
     email: String!
+    category: Category!
   }
 
   type Token {
@@ -12,8 +12,8 @@ const typeDefs = gql`
   }
 
   input createInput {
-    firstName: String!
-    lastName: String!
+    fullName: String!
+    category: Category!
     email: String!
     password: String!
     confirm_password: String!
@@ -37,10 +37,17 @@ const typeDefs = gql`
     user(input: idInput): User
   }
 
+  enum Category {
+    USER
+    BUSINESS
+    CUSTOMER
+  }
+
   type Mutation {
     register(input: createInput): User!
     login(input: loginInput): Token!
     changePassword(input: changePasswordInput): User!
+    deleteAccount: User!
   }
 `;
 
